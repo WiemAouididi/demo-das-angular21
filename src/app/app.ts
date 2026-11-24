@@ -5,7 +5,8 @@ import { Servers } from './servers/servers';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Server, Servers],
+  standalone: true,
+  imports: [RouterOutlet, Server],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

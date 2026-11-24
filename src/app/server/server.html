@@ -2,5 +2,49 @@
 <p>{{ serverName }}</p>
 <p>Server ID is {{ serverID }}, Server status is {{ getServerStatus() }}</p>
 <button [disabled]="allowServerCreation" (click)="onServerCreation()">Add Server</button>
-<p>{{ serverCreationStatus }}</p>
+<!--<p>{{ serverCreationStatus }}</p>-->
+<!--@if(serverCreation)-->
+<!--{-->
+<!--  <p>Server was created !!</p>-->
+<!--} @else {-->
+<!--  <p>Server was not created !!</p>-->
+<!--}-->
+@for (server of servers; track server)
+{
+  <p>{{server}}</p>
+}
+@empty {
+  <p>No data in table servers</p>
+}
 
+@switch (serverCreationStatus)
+{
+  @case('not-created')
+  {
+    <p>Server wasn't created!!</p>
+  }
+  @case('created!!')
+  {
+    <p>Server was created</p>
+  }
+  @default {
+    <p>Unknown Status</p>
+  }
+}
+
+<div [ngClass]="{
+    'active': isActive,
+    'disabled' : isDisabled
+}">
+  Server
+</div>
+
+<div [ngStyle]="{
+ 'font.size.px' : fontSize,
+ 'color' :  textColor
+}">
+  Server status is : Offline
+</div>
+
+<button (click)="toggleActive()">Toggle Active</button>
+<button (click)="toggleDisabled()">Toggle Disable</button>
